@@ -1,0 +1,22 @@
+.GameCards {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: xx-large;
+    height: 60vh;
+  }
+  
+  .GameMain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .GameImage {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+  }
