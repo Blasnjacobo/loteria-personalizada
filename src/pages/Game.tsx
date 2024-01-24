@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { User } from '../type/User'
+import { Card, User } from '../type/User'
+import { Link } from 'react-router-dom'
 
 interface GameProp {
   activeUser: User | undefined;
@@ -8,14 +9,18 @@ interface GameProp {
 const Game = ({ activeUser }: GameProp) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
   const [started, setStarted] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [previousCards, setPreviousCards] = useState<Card[]>([])
 
   useEffect(() => {
-    if (activeUser && started) {
+    let cardInterval: number
+
+    const startGame = () => {
       const collection = activeUser?.collection || []
       const collectionLength = collection.length
 
-      const shuffledIndices = Array.from({ length: collectionLength - 1 }, (_, index) => index + 1)
-      console.log(shuffledIndices)
+      const shuffledIndices = Array.from({ length: collectionLength }, (_, index) => index)
 
       // Fisher-Yates shuffle algorithm
       for (let i = shuffledIndices.length - 1; i > 0; i--) {
@@ -25,39 +30,94 @@ const Game = ({ activeUser }: GameProp) => {
 
       let index = 0
 
-      const cardInterval = setInterval(() => {
-        setCurrentCardIndex(shuffledIndices[index])
+      cardInterval = window.setInterval(() => {
+        if (!paused) {
+          setCurrentCardIndex(shuffledIndices[index])
 
-        index++
+          // Speak the name of the current card
+          speak(`${collection[shuffledIndices[index]].nombre}`)
+          index++
+          setPreviousCards((previousCards) => [
+            ...previousCards,
+            collection[shuffledIndices[index - 1]]
+          ])
 
-        if (index === collectionLength) {
-          // If all cards are shown, stop the interval
-          clearInterval(cardInterval)
+          if (index === collectionLength) {
+            // If all cards are shown, stop the interval
+            clearInterval(cardInterval)
+            setStarted(false)
+            setImageLoaded(false)
+          }
         }
-      }, 1000)
-
-      return () => clearInterval(cardInterval)
+      }, 3000)
     }
-  }, [activeUser, started])
+
+    if (activeUser && started && !paused) {
+      startGame()
+    }
+
+    return () => clearInterval(cardInterval)
+  }, [activeUser, started, paused])
 
   const currentCard = activeUser?.collection?.[currentCardIndex]
 
   const handleClickStart = () => {
-    setStarted(true)
+    if (!started) {
+      setStarted(true)
+    } else {
+      setPaused(!paused)
+    }
+  }
+
+  const handleClickRestart = () => {
+    setCurrentCardIndex(0)
+    setStarted(false)
+    setPaused(false)
+    setPreviousCards([])
+  }
+
+  const speak = (text: string) => {
+    if (window.speechSynthesis) {
+      const synth = window.speechSynthesis
+      const utterance = new SpeechSynthesisUtterance(text)
+      synth.speak(utterance)
+    } else {
+      console.error('Speech synthesis not supported in this environment.')
+    }
+  }
+
+  const handleImageLoad = () => {
+    setImageLoaded(true)
   }
 
   return (
     <main className='GameMain'>
-      <section>
-        {currentCard && (
-          <div className='GameCards' key={currentCard.id}>
-            <img className='GameImage' src={currentCard.url} alt={currentCard.nombre} />
-            <div>{currentCard.nombre}</div>
+      <Link to='/loteria-personalizada/' className='homeButton GoBack'>
+        Regresar a la pagina principal
+      </Link>
+      <section className='PreviousCards '>
+        {previousCards.map((card) => (
+          <div key={card.id}>
+            <img src={card.url} alt={card.nombre} />
           </div>
-        )}
+        ))}
       </section>
-      <section className=''>
-        <button onClick={handleClickStart}>Start</button>
+      {currentCard && (
+        <section className='GameCards FlexCenter' key={currentCard.id}>
+          <img
+            className='GameImage'
+            src={currentCard.url}
+            alt={currentCard.nombre}
+            onLoad={handleImageLoad}
+          />
+          {imageLoaded && <div>{currentCard.nombre}</div>}
+        </section>
+      )}
+      <section className='GameButtons'>
+        <button onClick={handleClickStart}>
+          {!started ? 'Start' : paused ? 'Resume' : 'Pause'}
+        </button>
+        <button onClick={handleClickRestart}>Restart</button>
       </section>
     </main>
   )

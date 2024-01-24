@@ -107,8 +107,9 @@ button:hover {
   gap: 5px;
 }
 
+
 /* Responsive Styles */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 440px) {
   .header-content {
     flex-direction: column; 
     text-align: center;
@@ -124,10 +125,6 @@ button:hover {
     gap: 0.5px;
     justify-content: center;
     align-items: center;
-  }
-
-  .homeButton{
-    width: fit-content;
   }
   .input-wrapper{
     display: flex;

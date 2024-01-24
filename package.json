@@ -1,4 +1,5 @@
 {
+  "homepage": "https://blasnjacobo.github.io/loteria-personalizada",
   "name": "loterial-personalizada",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -55,6 +58,7 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-standard": "^5.0.0",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.4"
   }
 }

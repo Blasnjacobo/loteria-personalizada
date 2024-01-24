@@ -1,22 +1,64 @@
 .GameCards {
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
     font-size: xx-large;
-    height: 60vh;
+    height: 80vh;
   }
   
-  .GameMain {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+.FlexCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.GameMain {
+  margin: 0;
+  height: 100vh;
+}
   
-  .GameImage {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    display: block; 
-    margin: 0 auto; 
-  }
+.GameImage {
+  max-width: 400px;
+  width: 100%;
+  max-height: 50vh;
+  display: block; 
+  margin: 0 auto; 
+}
+
+.GameButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+button {
+  padding: 0.5rem 0.5rem;
+  font-size: x-large;
+  border-radius: 10px;
+  margin-bottom: 5vh;
+}
+
+.GoBack {
+  margin: 1rem;
+  text-align: center;
+  font-size: x-large;
+}
+
+.PreviousCards {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  max-width: 80vw;
+  max-height: 20vh;
+  margin: 0 10vw;
+  justify-content: center;
+}
+
+.PreviousCards > div {
+  flex: 0 0 auto;
+} 
+
+.PreviousCards > div img {
+  max-height: 80%;  
+  max-width: 100%;   
+}
