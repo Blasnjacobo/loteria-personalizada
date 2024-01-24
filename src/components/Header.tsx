@@ -23,7 +23,7 @@ const Header = ({ setCode, active }: HeaderProps) => {
               type='text'
               onChange={handleChange}
               name='code'
-              placeholder='AQUI'
+              placeholder='Example: 123123123'
             />
           </div>
           <div>

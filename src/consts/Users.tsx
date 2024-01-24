@@ -1,6 +1,6 @@
 import { Blas } from './Blas'
-import { Rosally } from './Rosally'
+import { Persona } from './Persona'
 
 export const UsersInfo = [
-  Blas, Rosally
+  Blas, Persona
 ]
