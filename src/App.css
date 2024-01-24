@@ -109,7 +109,7 @@ button:hover {
 
 
 /* Responsive Styles */
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 600px) {
   .header-content {
     flex-direction: column; 
     text-align: center;

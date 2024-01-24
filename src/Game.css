@@ -62,3 +62,11 @@ button {
   max-height: 80%;  
   max-width: 100%;   
 }
+
+@media (max-width: 600px) {
+  .PreviousCards {
+    /* Adjust styles for smaller screens */
+    max-width: 100%;
+    margin: 0;
+  }
+}
