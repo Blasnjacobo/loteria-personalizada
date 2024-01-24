@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/loteria-personalizada/static/css/main.f387fec3.css",
+    "main.css": "/loteria-personalizada/static/css/main.6252a831.css",
     "main.js": "/loteria-personalizada/static/js/main.5f5fca9f.js",
     "static/media/loteria.png": "/loteria-personalizada/static/media/loteria.e45c512b45f6b74fbd8e.png",
     "index.html": "/loteria-personalizada/index.html",
-    "main.f387fec3.css.map": "/loteria-personalizada/static/css/main.f387fec3.css.map",
+    "main.6252a831.css.map": "/loteria-personalizada/static/css/main.6252a831.css.map",
     "main.5f5fca9f.js.map": "/loteria-personalizada/static/js/main.5f5fca9f.js.map"
   },
   "entrypoints": [
-    "static/css/main.f387fec3.css",
+    "static/css/main.6252a831.css",
     "static/js/main.5f5fca9f.js"
   ]
 }
